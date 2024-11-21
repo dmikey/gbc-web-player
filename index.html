@@ -1,52 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>Debug Dungeon: The Corporate Gauntlet</title>
-  <meta name="author" content="derekanderson" />
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="manifest.json">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/newplayer.css" />
+    <title>Debug Dungeon: The Corporate Gauntlet</title>
+    <meta name="author" content="derekanderson" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        /* Ensure the gameboy fits within the mobile screen without scrolling */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        .gameboy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-height: 100%;
+            max-width: 100%;
+        }
+    </style>
 </head>
 
 <body>
-  <div id="game">
-    <canvas id="mainCanvas" width="256" height="224">No Canvas Support</canvas>
-  </div>
-  <div id="controller">
-    <div id="controller_dpad">
-      <div id="controller_left"></div>
-      <div id="controller_right"></div>
-      <div id="controller_up"></div>
-      <div id="controller_down"></div>
+    <div class="gameboy" id="GameBoy">
+
+        <div class="screen-area">
+
+            <div class="power">
+                <div class="indicator">
+                    <div class="led"></div>
+                    <span class="arc" style="z-index:2"></span>
+                    <span class="arc" style="z-index:1"></span>
+                    <span class="arc" style="z-index:0"></span>
+                </div>
+                POWER
+            </div>
+
+            <canvas id="mainCanvas" class="display">No Canvas Support</canvas>
+
+
+
+            <div class="label">
+                <div class="title">RAD BOY</div>
+                <div class="subtitle">
+                    <span class="c">N</span><!--
+           --><span class="o1">I</span><!--
+           --><span class="l">N</span><!--
+           --><span class="o2">J</span><!--
+           --><span class="r">A</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nintendo">therad.ninja</div>
+
+        <div id="controller" class="controls">
+            <div id="controller_dpad" class="dpad">
+                <div class="up" id="controller_up"><i class="fa fa-caret-up"></i></div>
+                <div class="right" id="controller_right"><i class="fa fa-caret-right"></i></div>
+                <div class="down" id="controller_down"><i class="fa fa-caret-down"></i></div>
+                <div class="left" id="controller_left"><i class="fa fa-caret-left"></i></div>
+                <div class="middle"></div>
+            </div>
+            <div class="a-b">
+                <div class="b" id="controller_b">B</div>
+                <div class="a" id="controller_a">A</div>
+            </div>
+        </div>
+
+        <div class="start-select">
+            <div class="select" id="controller_select">SELECT</div>
+            <div class="start" id="controller_start">START</div>
+        </div>
+
+        <div class="speaker">
+            <div class="dot placeholder"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot placeholder"></div>
+
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+
+            <div class="dot placeholder"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot closed"></div>
+            <div class="dot open"></div>
+            <div class="dot placeholder"></div>
+        </div>
+
     </div>
-    <div id="controller_select" class="capsuleBtn">Select</div>
-    <div id="controller_start" class="capsuleBtn">Start</div>
-    <div id="controller_b" class="roundBtn">B</div>
-    <div id="controller_a" class="roundBtn">A</div>
-  </div>
-  <script>
-    const customControls = { "up": ["ArrowUp", "w"], "down": ["ArrowDown", "s"], "left": ["ArrowLeft", "a"], "right": ["ArrowRight", "d"], "a": ["Alt", "z", "j"], "b": ["Control", "k", "x"], "start": ["Enter"], "select": ["Shift"] }
-  </script>
-  <script src="binjgb.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/debugger.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function (error) {
-          console.log('ServiceWorker registration failed: ', error);
-        });
-      });
-    }
-  </script>
+
+
+    <script>
+        const customControls = { "up": ["ArrowUp", "w"], "down": ["ArrowDown", "s"], "left": ["ArrowLeft", "a"], "right": ["ArrowRight", "d"], "a": ["Alt", "z", "j"], "b": ["Control", "k", "x"], "start": ["Enter"], "select": ["Shift"] }
+    </script>
+    <script src="binjgb.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/debugger.js"></script>
 </body>
 
 </html>
