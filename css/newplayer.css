@@ -25,7 +25,7 @@
       z-index:1;
     }*/
 
-    &::after {
+    /* &::after {
         content: '';
         display: block;
         position: absolute;
@@ -37,7 +37,7 @@
         background-color: #4f50db;
         box-shadow: 0px 5px 0px #3d38b5;
         border-bottom: 2px solid #9998eb;
-    }
+    } */
 
     .screen-area {
         position: relative;
@@ -122,6 +122,8 @@
             width: 210px;
             border-radius: 3px;
             margin-bottom: 15px;
+            margin-left: 50%;
+            transform: translateX(-50%);
         }
 
         .label {
@@ -194,6 +196,9 @@
     .controls {
         display: flex;
         justify-content: space-between;
+        width: 85%;
+        margin-left: 50%;
+        transform: translateX(-50%);
 
         .dpad {
             position: relative;

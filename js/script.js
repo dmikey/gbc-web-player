@@ -362,7 +362,7 @@ class Emulator {
   }
 
   updateOnscreenGamepad() {
-    $("#controller").style.display = this.touchEnabled ? "block" : "none";
+    $("#controller").style.visible = this.touchEnabled ? "visible" : "hidden";
   }
 
   bindTouch() {
