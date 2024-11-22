@@ -6,15 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/newplayer.css" />
-    <title>Rad Boy Ninja</title>
+    <title>Rad Boy</title>
     <meta name="author" content="derekanderson" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="manifest" href="manifest.json">
-
     <style>
-        /* Ensure the gameboy fits within the mobile screen without scrolling */
         body,
         html {
             margin: 0;
@@ -36,11 +35,28 @@
 </head>
 
 <body>
+    <div id="installSplash" class="install">
+        <img width="96px" src="/icons/logo-192.png" alt="The Rad Boy" />
+        <h1>How to Install on iOS</h1>
+        <p>Follow these steps to add a The Rad Boy to your home screen:</p>
+        <ol>
+            <li>Tap the <strong>Share</strong> button (a square with an arrow pointing upward) at the bottom of the
+                screen.</li>
+            <li>Scroll down and select <strong>Add to Home Screen</strong>.</li>
+            <li>Customize the app's name if desired, then tap <strong>Add</strong>.</li>
+        </ol>
+        <p>The Rad Boy will now appear on your home screen, ready to use!</p>
+
+    </div>
+    <audio id="powerClick">
+        <source src="/sounds/light-switch-156813.mp3" type="audio/ogg">
+    </audio>
+
     <div class="gameboy" id="GameBoy">
 
         <div class="screen-area">
 
-            <div class="power">
+            <div id="power" class="power">
                 <div class="indicator">
                     <div class="led"></div>
                     <span class="arc" style="z-index:2"></span>

@@ -6,6 +6,29 @@
  */
 "use strict";
 
+
+
+function getPWADisplayMode() {
+  if (document.referrer.startsWith('android-app://'))
+    return 'twa';
+  if (window.matchMedia('(display-mode: browser)').matches)
+    return 'browser';
+  if (window.matchMedia('(display-mode: standalone)').matches)
+    return 'standalone';
+  if (window.matchMedia('(display-mode: minimal-ui)').matches)
+    return 'minimal-ui';
+  if (window.matchMedia('(display-mode: fullscreen)').matches)
+    return 'fullscreen';
+  if (window.matchMedia('(display-mode: window-controls-overlay)').matches)
+    return 'window-controls-overlay';
+
+  return 'unknown';
+}
+
+function isLocalhost() {
+  return window.location.hostname === 'localhost';
+}
+
 // User configurable.
 const ROM_FILENAME = "rom/game.gb";
 const ENABLE_REWIND = false;
@@ -69,6 +92,7 @@ const selectEl = $("#controller_select");
 const startEl = $("#controller_start");
 const bEl = $("#controller_b");
 const aEl = $("#controller_a");
+const powerEl = $("#power");
 
 const binjgbPromise = Binjgb();
 
@@ -138,14 +162,16 @@ class VM {
 const vm = new VM();
 
 // Load a ROM.
-(async function go() {
-  let response = await fetch(ROM_FILENAME);
-  let romBuffer = await response.arrayBuffer();
-  const extRam = new Uint8Array(JSON.parse(localStorage.getItem("extram")));
-  Emulator.start(await binjgbPromise, romBuffer, extRam);
-  emulator.setBuiltinPalette(vm.palIdx);
-})();
+document.addEventListener("DOMContentLoaded", function () {
 
+  const displayMode = getPWADisplayMode();
+  const localhost = isLocalhost();
+
+  if (displayMode === 'standalone' || localhost) {
+    $("#installSplash").style.display = "none";
+  }
+
+});
 function makeWasmBuffer(module, ptr, size) {
   return new Uint8Array(module.HEAP8.buffer, ptr, size);
 }
@@ -1384,3 +1410,30 @@ class Rewind {
     this.statePtr = 0;
   }
 }
+
+powerEl.addEventListener("click", function () {
+  const ledEl = powerEl.querySelector(".led");
+  var x = document.getElementById("powerClick");
+  x.play();
+
+  //if ledEl doesn't have class "on", then the emulator is off
+  if (!ledEl.classList.contains("on")) {
+    (async function go() {
+      let response = await fetch(ROM_FILENAME);
+      let romBuffer = await response.arrayBuffer();
+      const extRam = new Uint8Array(JSON.parse(localStorage.getItem("extram")));
+      Emulator.start(await binjgbPromise, romBuffer, extRam);
+      emulator.setBuiltinPalette(vm.palIdx);
+    })();
+  } else {
+    console.log("Emulator is off");
+    Emulator.stop();
+    // clear the canvas
+    const ctx = $("canvas").getContext("2d");
+    ctx.clearRect(0, 0, $("canvas").width, $("canvas").height);
+  }
+
+  if (ledEl) {
+    ledEl.classList.toggle("on");
+  }
+});
